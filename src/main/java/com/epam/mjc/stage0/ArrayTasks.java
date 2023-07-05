@@ -11,7 +11,7 @@ public class ArrayTasks {
      * Return a String[] array that will list all the seasons of the year, starting with winter.
      */
     public String[] seasonsArray() {
-
+        return  new String[]{"winter", "spring", "summer", "autumn"};
     }
 
     /**
@@ -25,7 +25,11 @@ public class ArrayTasks {
      * length = 5  -> [1, 2, 3, 4, 5]
      */
     public int[] generateNumbers(int length) {
-
+        int[] arr = new int[length];
+        for(int i = 1; i < length + 1; i++){
+            arr[i-1] = i;
+        }
+        return arr;
     }
 
     /**
@@ -37,7 +41,11 @@ public class ArrayTasks {
      * arr = [5, -3, -4] -> sum = -2
      */
     public int totalSum(int[] arr) {
-
+        int sum = 0;
+        for(int i = 0; i < arr.length - 1; i++){
+            sum += arr[i];
+        }
+        return sum;
     }
 
     /**
@@ -50,7 +58,14 @@ public class ArrayTasks {
      * arr = [5, -3, -4],   number = 10    ->  -1
      */
     public int findIndexOfNumber(int[] arr, int number) {
-
+        int res = -1;
+        for(int i = 0; i < arr.length - 1; i++){
+            if(arr[i] == number){
+                res = i;
+                break;
+            }
+        }
+        return res;
     }
 
     /**
@@ -63,7 +78,11 @@ public class ArrayTasks {
      * arr = ["pineapple", "apple", "pen"] -> ["pen", "apple", "pineapple"]
      */
     public String[] reverseArray(String[] arr) {
-
+        String[] reversed = new String[arr.length];
+        for(int i = arr.length - 1; i >= 0; i--){
+            reversed[arr.length - i - 1] = arr[i];
+        }
+        return reversed;
     }
 
     /**
@@ -78,7 +97,14 @@ public class ArrayTasks {
      * arr = [1, 2]         -> [1, 2]
      */
     public int[] getOnlyPositiveNumbers(int[] arr) {
-
+        int[] positiveNumbers = new int[]{};
+        int index = 0;
+        for(int i = 0; i < arr.length - 1; i++){
+            if(arr[i] > 0){
+                positiveNumbers[index++] = arr[i];
+            }
+        }
+        return positiveNumbers;
     }
 
     /**
@@ -93,5 +119,49 @@ public class ArrayTasks {
      */
     public int[][] sortRaggedArray(int[][] arr) {
 
+        int[][] sortedArray = new int[arr.length][];
+        int[] arrLengths = new int[arr.length];
+
+        for (int i = 0; i < arr.length; i++)
+        {
+            arrLengths[i] = arr[i].length;
+        }
+
+        for (int i = 0; i < arrLengths.length; i++)
+        {
+            for (int j = 0; j < arrLengths.length - 1; j++)
+            {
+                if (arrLengths[j] < arrLengths[j + 1]) {
+                    int temp = arrLengths[j];
+                    arrLengths[j] = arrLengths[j + 1];
+                    arrLengths[j + 1] = temp;
+                }
+            }
+
+            for (int j = 0; j < arrLengths.length; j++)
+            {
+                if (arr[i].length == arrLengths[j]) {
+                    sortedArray[i] = arr[j];
+                }
+            }
+        }
+
+        for (int i = 0; i < sortedArray.length; i++)
+        {
+            for (int j = 0; j < sortedArray[i].length; j++)
+            {
+                for (int k = 0; k < sortedArray[i].length - 1; k++)
+                {
+                    if (sortedArray[i][k] < sortedArray[i][k + 1])
+                    {
+                        int temp = sortedArray[i][k];
+                        sortedArray[i][k] = sortedArray[i][k + 1];
+                        sortedArray[i][k + 1] = temp;
+                    }
+                }
+            }
+        }
+
+        return sortedArray;
     }
 }
